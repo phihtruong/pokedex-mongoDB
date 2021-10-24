@@ -60,7 +60,7 @@ class App extends React.Component {
           </select>
           <button>INSERT</button>
           <div>
-            <PokemonList pokemons={this.state.pokemonList} />
+            <PokemonList pokemons={this.state.pokemonList} type={this.state.type}/>
           </div>
         </div>
       </div>
