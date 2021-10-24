@@ -6,7 +6,13 @@ module.exports = {
   },
 
   addPokemon: (pokemon) => {
+    let newPokemon = new Pokemon({
+      name: pokemon.name,
+      type: pokemon.type,
+      img: pokemon.img
+    });
 
+    return newPokemon.save();
   },
 
   updatePokemonName: (oldName, newName) => {

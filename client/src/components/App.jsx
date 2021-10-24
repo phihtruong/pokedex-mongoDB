@@ -7,13 +7,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       pokemonList: [],
-      type: 'Sort by Type'
+      type: 'Sort by Type',
+      isInputVisible: false
     };
 
     this.getPokemons = this.getPokemons.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSubmitNameChange = this.handleSubmitNameChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.toggleInput = this.toggleInput.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +54,43 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  toggleInput() {
+    this.setState({
+      isInputVisible: !this.state.isInputVisible
+    })
+  }
+
+  handleAdd(e) {
+    e.preventDefault();
+    let data = {
+      name: e.target.name.value,
+      type: e.target.type.value,
+      img: e.target.img.value
+    }
+    axios.post('/add', data)
+      .then(() => {
+        this.toggleInput();
+        this.getPokemons();
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
+    let inputForm;
+    if (this.state.isInputVisible) {
+        inputForm = <div>
+                      <button onClick={this.toggleInput}>CANCEL</button>
+                      <form onSubmit={this.handleAdd}>
+                        <input type="text" name="name" placeholder="Name"></input>
+                        <input type="text" name="type" placeholder="Type"></input>
+                        <input type="text" name="img" placeholder="Image URL"></input>
+                        <button type="submit">ADD</button>
+                      </form>
+                    </div>
+    } else {
+        inputForm = <button onClick={this.toggleInput}>INSERT</button>
+    }
+
     return (
       <div>
         <div>
@@ -73,7 +112,7 @@ class App extends React.Component {
             <option value="Ghost" >Ghost</option>
             <option value="Dragon" >Dragon</option>
           </select>
-          <button>INSERT</button>
+          {inputForm}
           <div>
             <PokemonList
               pokemons={this.state.pokemonList}

@@ -13,7 +13,14 @@ module.exports = {
   },
 
   addPokemon: (req, res) => {
-
+    let { name, type, img } = req.body;
+    db.addPokemon({ name, type, img })
+      .then(() => {
+        res.status(201).send()
+      })
+      .catch(err => {
+        res.status(404).send(err)
+      })
   },
 
   updatePokemonName: (req, res) => {

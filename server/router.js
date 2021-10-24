@@ -8,4 +8,6 @@ router.route('/update').put(controllers.updatePokemonName);
 
 router.route('/delete').delete(controllers.deletePokemon);
 
+router.route('/add').post(controllers.addPokemon);
+
 module.exports = router;
