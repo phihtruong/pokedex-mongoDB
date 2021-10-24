@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -6,6 +7,22 @@ class App extends React.Component {
     this.state = {
       pokemonList: []
     };
+
+    this.getPokemons = this.getPokemons.bind(this);
+  }
+
+  componentDidMount() {
+    this.getPokemons();
+  }
+
+  getPokemons() {
+    axios.get('/get')
+      .then(results => {
+        console.log('returned from axios get: ', results.data);
+        this.setState({
+          pokemonList: results.data
+        })
+      })
   }
 
   render() {
@@ -13,6 +30,7 @@ class App extends React.Component {
       <div>
         <div>
           <h1>Pokemon!</h1>
+          <h3>Number of pokemons in Pokedex: {this.state.pokemonList.length}</h3>
           <button>Show All</button>
           <select id="type">
             <option>Sort by Type</option>
