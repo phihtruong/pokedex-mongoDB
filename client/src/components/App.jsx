@@ -12,6 +12,7 @@ class App extends React.Component {
 
     this.getPokemons = this.getPokemons.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleSubmitNameChange = this.handleSubmitNameChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +35,13 @@ class App extends React.Component {
           pokemonList: results.data
         })
       })
+      .catch(err => console.error(err));
+  }
+
+  handleSubmitNameChange(oldName, newName) {
+    axios.put('/update', { oldName, newName })
+      .then(() => this.getPokemons())
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -60,7 +68,11 @@ class App extends React.Component {
           </select>
           <button>INSERT</button>
           <div>
-            <PokemonList pokemons={this.state.pokemonList} type={this.state.type}/>
+            <PokemonList
+              pokemons={this.state.pokemonList}
+              type={this.state.type}
+              handleSubmitNameChange={this.handleSubmitNameChange}
+            />
           </div>
         </div>
       </div>

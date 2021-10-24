@@ -1,7 +1,7 @@
 import React from 'react';
 import PokemonListEntry from './PokemonListEntry.jsx';
 
-const PokemonList = ({ pokemons, type }) => {
+const PokemonList = ({ pokemons, type, handleSubmitNameChange }) => {
 
   const filterType = () => {
     return pokemons.filter(pokemon => pokemon.type === type)
@@ -10,12 +10,24 @@ const PokemonList = ({ pokemons, type }) => {
   let render;
   if (type === 'Sort by Type') {
     render = <tbody>
-               {pokemons.map((pokemon, i) => <PokemonListEntry pokemon={pokemon} key={i} /> )}
-             </tbody>
+      {pokemons.map((pokemon, i) =>
+        <PokemonListEntry
+          pokemon={pokemon}
+          key={i}
+          handleSubmitNameChange={handleSubmitNameChange}
+        />
+      )}
+    </tbody>
   } else if (pokemons.length) {
     render = <tbody>
-               {filterType().map((pokemon, i) => <PokemonListEntry pokemon={pokemon} key={i} /> )}
-             </tbody>
+      {filterType().map((pokemon, i) =>
+        <PokemonListEntry
+          pokemon={pokemon}
+          key={i}
+          handleSubmitNameChange={handleSubmitNameChange}
+        />
+      )}
+    </tbody>
   }
 
   return (

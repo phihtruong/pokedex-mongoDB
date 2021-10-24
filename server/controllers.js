@@ -16,8 +16,15 @@ module.exports = {
 
   },
 
-  updatePokemon: (req, res) => {
-
+  updatePokemonName: (req, res) => {
+    let { oldName, newName } = req.body
+    db.updatePokemonName(oldName, newName)
+      .then(() => {
+        res.status(201).send()
+      })
+      .catch(err => {
+        res.status(404).send(err);
+      })
   },
 
   deletePokemon: (req, res) => {

@@ -9,8 +9,8 @@ module.exports = {
 
   },
 
-  updatePokemon: (pokemon) => {
-
+  updatePokemonName: (oldName, newName) => {
+    return Pokemon.findOneAndUpdate({ name: oldName }, { name: newName });
   },
 
   deletePokemon: (pokemon) => {
