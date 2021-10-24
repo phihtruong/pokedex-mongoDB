@@ -20,7 +20,7 @@ module.exports = {
     let { oldName, newName } = req.body
     db.updatePokemonName(oldName, newName)
       .then(() => {
-        res.status(201).send()
+        res.status(202).send()
       })
       .catch(err => {
         res.status(404).send(err);
@@ -28,6 +28,14 @@ module.exports = {
   },
 
   deletePokemon: (req, res) => {
-
+    let { name } = req.body;
+    db.deletePokemon(name, (err, Pokemon) => {
+      if (err) {
+        console.log('controller: error deleting...', err);
+        res.status(404).send(err)
+      } else {
+        res.status(203).send(Pokemon);
+      }
+    })
   }
 };

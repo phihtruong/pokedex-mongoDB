@@ -1,7 +1,7 @@
 import React from 'react';
 import PokemonListEntry from './PokemonListEntry.jsx';
 
-const PokemonList = ({ pokemons, type, handleSubmitNameChange }) => {
+const PokemonList = ({ pokemons, type, handleSubmitNameChange, handleDelete }) => {
 
   const filterType = () => {
     return pokemons.filter(pokemon => pokemon.type === type)
@@ -15,6 +15,7 @@ const PokemonList = ({ pokemons, type, handleSubmitNameChange }) => {
           pokemon={pokemon}
           key={i}
           handleSubmitNameChange={handleSubmitNameChange}
+          handleDelete={handleDelete}
         />
       )}
     </tbody>
@@ -25,6 +26,7 @@ const PokemonList = ({ pokemons, type, handleSubmitNameChange }) => {
           pokemon={pokemon}
           key={i}
           handleSubmitNameChange={handleSubmitNameChange}
+          handleDelete={handleDelete}
         />
       )}
     </tbody>

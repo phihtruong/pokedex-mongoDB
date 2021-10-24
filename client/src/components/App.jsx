@@ -13,6 +13,7 @@ class App extends React.Component {
     this.getPokemons = this.getPokemons.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSubmitNameChange = this.handleSubmitNameChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,12 @@ class App extends React.Component {
 
   handleSubmitNameChange(oldName, newName) {
     axios.put('/update', { oldName, newName })
+      .then(() => this.getPokemons())
+      .catch(err => console.error(err));
+  }
+
+  handleDelete(name) {
+    axios.delete('/delete', { data: { name }})
       .then(() => this.getPokemons())
       .catch(err => console.error(err));
   }
@@ -72,6 +79,7 @@ class App extends React.Component {
               pokemons={this.state.pokemonList}
               type={this.state.type}
               handleSubmitNameChange={this.handleSubmitNameChange}
+              handleDelete={this.handleDelete}
             />
           </div>
         </div>

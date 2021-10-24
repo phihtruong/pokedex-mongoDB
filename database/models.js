@@ -13,7 +13,13 @@ module.exports = {
     return Pokemon.findOneAndUpdate({ name: oldName }, { name: newName });
   },
 
-  deletePokemon: (pokemon) => {
-
+  deletePokemon: (name, callback) => {
+    return Pokemon.findOneAndDelete({ name }, (err, Pokemon) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, Pokemon);
+      }
+    });
   }
 }

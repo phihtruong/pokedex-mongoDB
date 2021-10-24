@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PokemonListEntry = ({ pokemon, handleSubmitNameChange }) => {
+const PokemonListEntry = ({ pokemon, handleSubmitNameChange, handleDelete }) => {
 
 
   const toggleNameChangeInput = (e) => {
@@ -14,6 +14,7 @@ const PokemonListEntry = ({ pokemon, handleSubmitNameChange }) => {
       <td> <div onClick={toggleNameChangeInput}> { pokemon.name } </div></td>
       <td> <img src={ pokemon.img } /> </td>
       <td> { pokemon.type } </td>
+      <td> <button onClick={() => handleDelete(pokemon.name)}>Delete</button></td>
     </tr>
   )
 };
