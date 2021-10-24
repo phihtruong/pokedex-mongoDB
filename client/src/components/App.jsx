@@ -6,14 +6,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pokemonList: []
+      pokemonList: [],
+      type: 'Sort by Type'
     };
 
     this.getPokemons = this.getPokemons.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
   }
 
   componentDidMount() {
     this.getPokemons();
+  }
+
+  handleTypeChange(e) {
+    let newType = e.target.value;
+    console.log(newType);
+    this.setState({
+      type: newType
+    });
   }
 
   getPokemons() {
@@ -32,21 +42,21 @@ class App extends React.Component {
         <div>
           <h1>Pokemon!</h1>
           <h3>Number of pokemons in Pokedex: {this.state.pokemonList.length}</h3>
-          <button>Show All</button>
-          <select id="type">
-            <option>Sort by Type</option>
-            <option>Grass</option>
-            <option>Fire</option>
-            <option>Water</option>
-            <option>Normal</option>
-            <option>Poison</option>
-            <option>Electric</option>
-            <option>Ground</option>
-            <option>Fighting</option>
-            <option>Psychic</option>
-            <option>Rock</option>
-            <option>Ghost</option>
-            <option>Dragon</option>
+          <button value="Sort by Type" onClick={this.handleTypeChange}>Show All</button>
+          <select id="type" value={this.state.type} onChange={this.handleTypeChange}>
+            <option disabled>{this.state.type}</option>
+            <option value="Grass" >Grass</option>
+            <option value="Fire" >Fire</option>
+            <option value="Water" >Water</option>
+            <option value="Normal" >Normal</option>
+            <option value="Poison" >Poison</option>
+            <option value="Electric" >Electric</option>
+            <option value="Ground" >Ground</option>
+            <option value="Fighting" >Fighting</option>
+            <option value="Psychic" >Psychic</option>
+            <option value="Rock" >Rock</option>
+            <option value="Ghost" >Ghost</option>
+            <option value="Dragon" >Dragon</option>
           </select>
           <button>INSERT</button>
           <div>
