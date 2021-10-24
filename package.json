@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "react-dev": "webpack --config ./webpack.config.js --mode development -w"
+    "react-dev": "webpack --config ./webpack.config.js --mode development -w",
+    "schema": "mysql -u root -p < db/schema.sql",
+    "mysql": "mysql -u root -p"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "axios": "^0.23.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.12",
+    "mysql2": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
